@@ -18,16 +18,23 @@
 		</div>
 
 		<div class="links">
+			<a href="/monte-carlo-model">MMC</a>
+		</div>
+
+		<div class="links">
 			<a href="/lineal-programing">PL</a>
 		</div>
+		
 		<div class="links">
 			<a href="/nonlinear-programing">PNL</a>
 		</div>
-		<div class="links">
-			<a href="/monte-carlo-model">MMC</a>
-		</div>
+
 		<div class="links">
 			<a href="/time-series">ST</a>
+		</div>
+
+		<div class="links">
+			<a href="/prototype">Prototipo</a>
 		</div>
 
 		<div class="links">

@@ -25,7 +25,7 @@
 	let formData = { ...initialConfig };
 
 	// Constantes y validación
-	const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1/modulo2/';
+	const API_URL = import.meta.env.VITE_API_URL || 'https://fuzzy-guacamole-5xv5r54px5rc4rxq-5000.app.github.dev/api/v1/modulo2/';
 	const CONSTRAINTS = {
 		area: { min: 0, max: 100, step: 0.1 },
 		efficiency: { min: 0, max: 1, step: 0.01 },

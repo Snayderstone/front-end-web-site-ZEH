@@ -6,6 +6,7 @@
   import ConsumptionChart from './ElectricConsumptionChart.svelte';
   import { tweened } from 'svelte/motion';
   import { cubicOut } from 'svelte/easing';
+  import GaussianChart from './GaussianChart.svelte';
 
   let loading = false;
   let error: string | null = null;
@@ -25,7 +26,7 @@
     error = null;
     
     try {
-      const response = await fetch('http://localhost:5000/api/v1/modulo4/', {
+      const response = await fetch('https://fuzzy-guacamole-5xv5r54px5rc4rxq-5000.app.github.dev/api/v1/modulo4/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -143,6 +144,12 @@
             {prediction}
           />
         </div>
+
+        {#if prediction}
+          <div class="chart-section">
+            <GaussianChart {prediction} />
+          </div>
+        {/if}
       </section>
     {/if}
   </div>
