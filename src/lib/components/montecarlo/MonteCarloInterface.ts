@@ -7,6 +7,9 @@ export interface SimulationResults {
     produccion_anual_promedio: number;
     region: string;
     roi_promedio: number;
+    roi_acumulado: number;
+    roi_anual_dolares: number;
+    roi_acumulado_dolares: number;
     vpn_promedio: number;
   }
   

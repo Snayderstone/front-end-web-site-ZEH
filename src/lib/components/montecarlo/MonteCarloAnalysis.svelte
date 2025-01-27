@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade, slide } from 'svelte/transition';
-  import type { SimulationResults, SimulationInput } from './types';
+  import type { SimulationResults, SimulationInput } from './MonteCarloInterface';
 
   let loading = false;
   let error: string | null = null;
@@ -120,29 +120,29 @@
         </div>
 
         <div class="form-group">
-          <label>Rango de Precio Energía ($/kWh)</label>
+          <label for="precio_min">Rango de Precio Energía ($/kWh)</label>
           <div class="range-inputs">
-            <input type="number" bind:value={simulationInput.precio_energia_range[0]} min="0" max="1" step="0.01">
+            <input type="number" id="precio_min" bind:value={simulationInput.precio_energia_range[0]} min="0" max="1" step="0.01">
             <span>a</span>
-            <input type="number" bind:value={simulationInput.precio_energia_range[1]} min="0" max="1" step="0.01">
+            <input type="number" id="precio_max" bind:value={simulationInput.precio_energia_range[1]} min="0" max="1" step="0.01">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Rango de Producción Solar (kWh/m²/día)</label>
+          <label for="produccion_min">Rango de Producción Solar (kWh/m²/día)</label>
           <div class="range-inputs">
-            <input type="number" bind:value={simulationInput.produccion_solar_range[0]} min="0" max="10" step="0.1">
+            <input type="number" id="produccion_min" bind:value={simulationInput.produccion_solar_range[0]} min="0" max="10" step="0.1">
             <span>a</span>
-            <input type="number" bind:value={simulationInput.produccion_solar_range[1]} min="0" max="10" step="0.1">
+            <input type="number" id="produccion_max" bind:value={simulationInput.produccion_solar_range[1]} min="0" max="10" step="0.1">
           </div>
         </div>
 
         <div class="form-group">
-          <label>Rango de Consumo Energía (kWh/día)</label>
+          <label for="consumo_min">Rango de Consumo Energía (kWh/día)</label>
           <div class="range-inputs">
-            <input type="number" bind:value={simulationInput.consumo_energia_range[0]} min="0" max="100" step="0.1">
+            <input type="number" id="consumo_min" bind:value={simulationInput.consumo_energia_range[0]} min="0" max="100" step="0.1">
             <span>a</span>
-            <input type="number" bind:value={simulationInput.consumo_energia_range[1]} min="0" max="100" step="0.1">
+            <input type="number" id="consumo_max" bind:value={simulationInput.consumo_energia_range[1]} min="0" max="100" step="0.1">
           </div>
         </div>
 
@@ -354,12 +354,12 @@
       color: var(--color--text);
       font-weight: 600;
       font-size: 1.1rem;
-
-      &.highlight {
-        color: var(--color--primary);
-        font-size: 1.2rem;
-      }
     }
+  }
+
+  .metric-item .value.highlight {
+    color: var(--color--primary);
+    font-size: 1.2rem;
   }
 
   .loading-spinner {
