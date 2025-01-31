@@ -2,42 +2,42 @@ import type { Feature } from "$lib/utils/types";
 
 export default [ 
   {
-    name: 'Markdown Support',
+    name: 'Eficiencia Energética',
     description:
-      'Blog posts are written in Markdown, a simple and nearly-universal format. This means you can bring over your posts from other platforms, and easily export to another if you want to.',
-    image: 'images/features/markdown.jpg',
+      'Maximización de la generación de energía con recursos limitados.',
+    image: 'images/features/solar4.jpeg',
     tags: [{ label: 'Powered by MDsveX' }]
   }, 
   {
-    name: 'Themeable',
+    name: 'Minimización de Costos',
     description:
-      'You can easily theme the entire website by changing just a few colors in the _themes.scss file.',
-    image: 'images/features/themeable.jpg',
+      'Reducción de costos operativos y de inversión mediante decisiones óptimas.',
+    image: 'images/features/solar5.jpeg',
     tags: [{ label: 'Primary Color' }, { label: 'Secondary Color', color: 'secondary' }]
   }, 
   {
-    name: 'Extensible',
+    name: 'Sustentabilidad',
     description:
-      'Components are built to be reused, and you can build new pages and layouts without much CSS knowledge. You can see all components in Histoire by running "npm run story:dev"',
-    image: 'images/features/extensible.jpg',
+      'Optimización del uso de materiales, reduciendo el impacto ambiental.',
+    image: 'images/features/solar6.jpeg',
   }, 
   {
-    name: 'Well Optimized',
+    name: 'Menos uso de combustibles',
     description:
-      'Images are automatically optimized and lazy loaded, to ensure the website loads as fast as possible regardless of connection speed.',
-    image: 'images/features/optimized.jpg',
+      'Disminuye la necesidad del uso de combustibles fósiles.',
+    image: 'images/features/solar7.jpeg',
     tags: [{ label: 'Powered by Image Transmutation' }]
   }, 
   {
-    name: 'Light and Dark Modes',
+    name: 'Reduce la huella de carbono',
     description:
-      'This template was built with dark mode in mind. It can swap between themes automatically (based on system settings) or manually. Both themes can be tweaked in the _themes.scss file.',
-    image: 'images/features/light-dark.jpg',
+      'Menos dependencia de fuentes de energía no renovables.',
+    image: 'images/features/solar8.jpeg',
   },
   {
-    name: 'Open Source',
+    name: 'Es renovable y sostenible',
     description:
-      'All code is open source, which means you can copy and modify it to your heart\'s content. All I ask is that you make your code open too so that knowledge can be passed on.',
-    image: 'images/features/open-source.jpg'
+      'El uso de paneles solares se puede aprovechar en cualquier lugar.',
+    image: 'images/features/solar9.jpeg'
   },
 ] as Feature[];

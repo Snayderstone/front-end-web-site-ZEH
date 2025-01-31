@@ -11,8 +11,7 @@
 			<SparklingHighlight color="secondary">ZEH!</SparklingHighlight>
 		</h2>
 		<p>
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum velit voluptatibus commodi
-			autem provident quam labore, libero beatae praesentium voluptate?
+			El Hogar de Energía Cero (ZEH) es una vivienda que genera tanta energía como la que consume. Está diseñado para ser energéticamente eficiente y sostenible, utilizando fuentes de energía renovables como paneles solares y turbinas eólicas para generar electricidad.
 		</p>
 		<div class="socials">
 			<span>Socials:</span>
@@ -21,7 +20,7 @@
 	</div>
 	<div class="image">
 		<Image
-			src="/images/solar-panel.png"
+			src="/images/features/panel-home.jpg"
 			alt="Sample for the static template"
 		/>
 	</div>
