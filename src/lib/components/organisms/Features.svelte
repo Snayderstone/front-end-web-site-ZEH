@@ -8,8 +8,8 @@
 
 <ContentSection
 	id="features"
-	title="Features"
-	description="Here are some of the features of this template"
+	title="Beneficios"
+	description="Zero Energy Home (ZEH)"
 >
 	<div class="features-container">
 		<div class="three-group-grid">

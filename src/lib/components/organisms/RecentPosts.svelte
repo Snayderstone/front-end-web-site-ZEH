@@ -9,8 +9,8 @@
 
 <ContentSection
 	id="recent-posts"
-	title="Blog posts"
-	description="This section shows the 4 most recent blog posts. Check them out for tips on how to get started!"
+	title="Blog"
+	description="Reduce el impacto ambiental, sé más eficiente en la generación de la energía y automatiza tus procesos."
 	align="left"
 >
 	<div slot="button">

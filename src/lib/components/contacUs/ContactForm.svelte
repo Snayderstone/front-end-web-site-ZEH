@@ -211,16 +211,17 @@
       textarea {
         width: 100%;
         padding: 0.75rem;
-        border: 1px solid var(--color--border);
+        border: 1px solid var(--color--border, #ccc);
         border-radius: 0.5rem;
         background: var(--color--background);
         color: var(--color--text);
+        font-size: 1rem;
         transition: all 0.3s ease;
   
         &:focus {
           outline: none;
-          border-color: var(--color--primary);
-          box-shadow: 0 0 0 2px var(--color--primary-transparent);
+          border-color: var(--color--primary, #6200ea);
+          box-shadow: 0 0 0 5px var(--color--primary-transparent, #6200ea);
         }
       }
     }
