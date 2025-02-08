@@ -1,49 +1,42 @@
-# SvelteKit Static Blog Template
+# Contenido del archivo README.md
 
-A lightweight and customizable template for blogs and portfolio websites, built with SvelteKit.
+# ZEH Website
 
-<p align="center">
-    <img src="static/images/site-screenshot.png" alt="Screenshot" />
-</p>
+Este proyecto es una página web dedicada a ZEH, enfocada en la optimización y el registro del consumo de energía de paneles solares. A continuación se detallan los componentes y funcionalidades del proyecto.
 
-It was built with a few goals in mind:
+## Objetivos del Proyecto
 
-- Responsive design: the website looks and behaves well on screens of all sizes;
-- Fast: it only loads what's needed for it to work;
-- Adaptive: it supports dark mode from most operating systems by default (desktop and mobile);
-- Pretty: have a pleasant design that is both accessible and pleasing to the eye.
+- **Optimización de Energía**: Implementar modelos que calculen la producción de energía de los paneles solares y optimicen el consumo energético.
+- **Registro de Datos**: Permitir el seguimiento del rendimiento de los paneles solares y el consumo de energía a lo largo del tiempo.
 
-I achieved this with the help of SvelteKit. There is almost no JavaScript running, and it actually works with JS disabled! While JS is awesome, it's important to know when it's not needed.
+## Estructura del Proyecto
 
-# Demo site
+- **src/lib/components**: Contiene componentes organizados en átomos, moléculas y organismos.
+- **src/lib/models**: Incluye modelos para los paneles solares y el consumo energético.
+  - `solar-panel.ts`: Define la clase `SolarPanel` que modela las propiedades y comportamientos de un panel solar.
+  - `consumption.ts`: Define la clase `Consumption` que modela los patrones de consumo energético.
+- **src/lib/utils**: Funciones utilitarias para cálculos relacionados con la producción y consumo de energía.
+- **src/routes**: Contiene las páginas del sitio organizadas por diseño.
+- **static/images**: Imágenes estáticas utilizadas en el proyecto.
 
-You can see the template live [on the demo site](https://sveltekit-static-blog-template.vercel.app/). Additionally, you can check all components in isolation [on Histoire](https://histoire-sveltekit-static-blog-template.vercel.app/).
+## Instalación
 
-# Building & Running Locally
-
-To run it locally, you simply have to run:
+Para instalar las dependencias del proyecto, ejecuta:
 
 ```shell
-# First, install dependencies
 npm install
-# Then, run it on dev mode
+```
+
+## Ejecución Local
+
+Para ejecutar el proyecto en modo de desarrollo, utiliza:
+
+```shell
 npm run dev
 ```
 
-The site should now be available at http://localhost:5173/ on your local machine, and your local machine's IP address on your network—great for testing on mobile OSes.
+El sitio estará disponible en `http://localhost:5173/`.
 
-# Histoire / Storybook
+## Licencia
 
-I've used [Histoire](https://histoire.dev), a Vite-based Storybook alternative to be able to see and develop components in isolation. To open it, run `npm run story:dev`.
-
-# Image Optimization
-
-This website uses [image-transmutation](https://github.com/matfantinel/image-transmutation) to automatically optimize images used in the site. This means that even if you use non-optimal image formats (like lossless PNGs), it will go over the images and convert images to WebP and AVIF for you, as long as you use the `<Image />` component instead of `<img />`. This is done on build, so it doesn't change anything when running the website locally.
-
-# Managing Posts
-
-All posts are Markdown files that are processed with [MDsveX](https://mdsvex.pngwn.io/) to allow using Svelte components inside them. In order to make it easier to manage posts, I highly recommend the [Front Matter VS Code extension](https://frontmatter.codes/), which gives you a nice CMS-like UI.
-
-# Hosting
-
-When you run `npm run build`, the website will be compiled into a static site, which means you can host it pretty much anywhere. Some free alternatives I recommend are GitHub Pages, Vercel and Netlify.
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
