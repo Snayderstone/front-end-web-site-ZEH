@@ -59,7 +59,7 @@
 		try {
 			generarDatosAleatorios();
 
-			const response = await fetch('https://fuzzy-guacamole-5xv5r54px5rc4rxq-5000.app.github.dev/api/v1/modulo1/', {
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/modulo1/`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(formData)

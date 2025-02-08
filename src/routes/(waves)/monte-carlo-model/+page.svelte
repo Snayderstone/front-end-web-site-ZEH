@@ -13,10 +13,6 @@
 				Simulador de Inversión
 				<SparklingHighlight>Solar</SparklingHighlight>
 			</h1>
-			<p class="subtitle">
-				Evalúa la viabilidad financiera de instalar paneles solares en tu hogar utilizando
-				simulación Monte Carlo
-			</p>
 		</div>
 
 		<div class="content-grid">
@@ -66,12 +62,6 @@
 			-webkit-text-fill-color: transparent;
 		}
 
-		.subtitle {
-			color: var(--color--text-shade);
-			font-size: 1.1rem;
-			max-width: 600px;
-			margin: 0 auto;
-		}
 	}
 
 	.content-grid {

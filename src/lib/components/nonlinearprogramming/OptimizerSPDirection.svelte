@@ -69,7 +69,7 @@
 		error.set('');
 
 		try {
-			const response = await fetch(`${API_URL}`, {
+			const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/modulo2/`, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'

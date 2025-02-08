@@ -5,6 +5,7 @@
 	import Features from '$lib/components/organisms/Features.svelte';
 	import type { Feature, BlogPost } from '$lib/utils/types';
 	import Slider from '$lib/components/organisms/Slider.svelte';
+	
 
 	export let data: {
 		features: Feature[];
@@ -15,8 +16,9 @@
 </script>
 
 <div class="container">
-	<Slider />
+	
 	<Hero />
+	<Slider />
 	<About />
 	{#if posts && posts.length > 0}
 		<RecentPosts {posts} />

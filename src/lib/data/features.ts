@@ -6,14 +6,14 @@ export default [
     description:
       'Maximización de la generación de energía con recursos limitados.',
     image: 'images/features/solar4.jpeg',
-    tags: [{ label: 'Powered by MDsveX' }]
+    tags: [{ label: 'Optimización energética' }]
   }, 
   {
     name: 'Minimización de Costos',
     description:
       'Reducción de costos operativos y de inversión mediante decisiones óptimas.',
     image: 'images/features/solar5.jpeg',
-    tags: [{ label: 'Primary Color' }, { label: 'Secondary Color', color: 'secondary' }]
+    tags: [{ label: 'Menos Costo' }, { label: 'Más rentabilidad', color: 'secondary' }]
   }, 
   {
     name: 'Sustentabilidad',
@@ -26,7 +26,7 @@ export default [
     description:
       'Disminuye la necesidad del uso de combustibles fósiles.',
     image: 'images/features/solar7.jpeg',
-    tags: [{ label: 'Powered by Image Transmutation' }]
+    tags: [{ label: 'Menos emisiones de carbono' }]
   }, 
   {
     name: 'Reduce la huella de carbono',

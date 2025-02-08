@@ -1,11 +1,12 @@
 ---
 slug: project-structure
-title: Blog sobre Energía Fotovoltaica
+title: Tipos de Paneles Solares
 date: 2023-04-22T21:55:21.800Z
-excerpt: Este es un blog sobre energía fotovoltaica.
+excerpt: Estos paneles son los más eficientes y tienen una mayor vida útil, aunque su costo es más elevado.
 coverImage: /images/posts/OIP.png
 tags:
-  - Documentation
+  - Paneles Solares
+
 ---
 
 <script>

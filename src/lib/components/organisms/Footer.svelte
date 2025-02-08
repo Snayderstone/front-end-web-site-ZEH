@@ -4,24 +4,19 @@
 	import ThemeToggle from '$lib/components/molecules/ThemeToggle.svelte';
 	import Building from '$lib/components/atoms/Building.svelte';
 </script>
-
 <footer>
 	<div class="wave">
 		<FooterWave />
 	</div>
 	<div class="content">
 		<div class="copyright">
-			This template was built by <a
-				href="https://fantinel.dev?utm_source=site-template"
-				target="_blank"
-				rel="noopener noreferrer">Matheus Fantinel</a
-			>.
+			 
+			Facultad de Ingeniería y Ciencias Aplicadas -
+			<a href="https://www.uce.edu.ec/web/fing" target="_blank" rel="noopener noreferrer">Universidad Central del Ecuador</a>.
 		</div>
 		<div class="credits">
-			Powered by <a href="https://kit.svelte.dev/" target="_blank" rel="noopener noreferrer"
-				>SvelteKit</a
-			>. Icons by
-			<a href="https://iconoir.com/" target="_blank" rel="noopener noreferrer">Iconoir</a>.
+			Proyecto desarrollado por estudiantes de la Carrera de 
+			<a href="https://www.uce.edu.ec/" target="_blank" rel="noopener noreferrer">Sistemas de Información </a>.
 		</div>
 		<div class="socials">
 			<Socials />

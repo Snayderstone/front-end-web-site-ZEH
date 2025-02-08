@@ -3,28 +3,30 @@
 	import GitHubIcon from '$lib/icons/socials/github.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
 	import Sparkles from '../atoms/Sparkles.svelte';
+	import SparklingHighlight from '../molecules/SparklingHighlight.svelte';
 </script>
 
+
+
 <section id="hero">
-	<h1 class="hello">Optimización Energética para Hogares con Energía Solar en Ecuador (OEHESE) </h1>
+	<h1 class="hello">Optimización Energética para Hogares con Energía Cero en Ecuador <SparklingHighlight color="secondary">ZEH!</SparklingHighlight> </h1>
 	<p class="intro">
 		<span class="left">⚡ Innovación que impulsa ,</span>
 		<span class="right">un futuro sostenible...🌱.</span>
 	</p>
 	<div class="ctas">
 		<Sparkles>
-			<Button href="https://github.com/matfantinel/sveltekit-static-blog-template">
+			<Button href="https://github.com/Snayderstone/front-end-web-site-ZEH.git">
 				<GitHubIcon slot="icon" />
-				Source Code
+				Código fuente
 
 			</Button>
 		</Sparkles>
-		<Button color="primary" href="https://histoire-sveltekit-static-blog-template.vercel.app/">
-			<FeaturesIcon slot="icon" />
-			Components
-		</Button>
+		<Button color="primary" href="/contactUs">
+			<FeaturesIcon slot="icon" />¡Contáctanos!</Button>
 	</div>
 </section>
+
 
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';

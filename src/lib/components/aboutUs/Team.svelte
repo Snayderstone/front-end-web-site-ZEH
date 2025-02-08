@@ -37,7 +37,7 @@
       role: 'Quality Assurance',
       email: 'jcperezc1@uce.edu.ec',
       avatar: '👨‍💼',
-      skills: ['Testing', 'QA', 'Documentation'],
+      skills: ['Testing', 'QA', 'Documentación'],
       socialLinks: {
         github: 'https://github.com',
         linkedin: 'https://linkedin.com'

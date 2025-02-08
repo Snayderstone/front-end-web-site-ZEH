@@ -1,11 +1,11 @@
 ---
 slug: customization
-title: Introducción a la Energía Fotovoltaica
+title: Energía Fotovoltaica
 date: 2025-01-22T21:55:27.154Z
-excerpt: Introducción a la Energía Fotovoltaica
+excerpt: Introducción a la Energía Fotovoltaica y su Funcionamiento
 coverImage: /images/posts/energy-indepedence.png
 tags:
-  - Documentation
+  - Energía Fotovoltaica
 ---
 
 ## 1. Introducción a la Energía Fotovoltaica

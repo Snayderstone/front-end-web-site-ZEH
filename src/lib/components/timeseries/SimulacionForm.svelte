@@ -130,35 +130,19 @@ const DEFAULTS = {
 </script>
 
 <div class="simulation-container">
-
-
-  <form 
-    class="simulation-form" 
-    on:submit|preventDefault={handleSubmit}
-    on:keydown={handleKeyDown}
-  >
+  <form class="simulation-form" on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     <div class="sun-card card">
-        <header class="simulation-header">
-            <h2>Simulación del consumo de energía</h2>
-          </header>
-        <Sun />
+      <Sun />
     </div>
 
-    <div class="cards-container">
+    <div class="form-grid">
       <!-- Tarjeta de Electrodomésticos -->
       <div class="card electrodomesticos-card">
         <div class="card-header">
           <h3>Electrodomésticos</h3>
-          <div class="card-actions">
-            <Button 
-              color="secondary" 
-              on:click={resetForm} 
-              title="Restablecer formulario"
-              type="button"
-            >
-              ↺
-            </Button>
-          </div>
+          <Button color="secondary" on:click={resetForm} title="Restablecer formulario" type="button">
+            <span class="icon">↺</span>
+          </Button>
         </div>
 
         <div class="electrodomesticos-list">
@@ -303,7 +287,7 @@ const DEFAULTS = {
         title={!formValid ? 'Por favor, complete todos los campos correctamente' : 'Iniciar simulación'}
       >
         Iniciar simulación
-        <span class="shortcut">(Ctrl + Enter)</span>
+        <span class="shortcut" aria-hidden="true">(Ctrl + Enter)</span>
       </Button>
       </Sparkles>
     </div>
@@ -311,175 +295,152 @@ const DEFAULTS = {
 </div>
 
 <style lang="scss">
+  @import '$lib/scss/breakpoints.scss';
+
   .simulation-container {
-    --card-bg: var(--color--card-background);
-    --card-border: var(--color--border);
-    --text-primary: var(--color--text);
-    --text-secondary: var(--color--text-shade);
-    --primary-color: var(--color--primary);
-    --secondary-color: var(--color--secondary);
-    --error-color: var(--color--error);
-    --hover-bg: var(--color--hover);
-    --input-bg: var(--color--input-background);
+    --card-padding: clamp(1rem, 2vw, 2rem);
+    --input-height: 2.5rem;
+    --border-radius: 0.75rem;
     
     width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 1rem;
-  }
+    padding: var(--card-padding);
 
-  .simulation-header {
-    text-align: center;
-    margin-bottom: 2rem;
-
-    h2 {
-      color: var(--text-primary);
-      font-family: var(--font--title);
-      margin: 0;
-      font-size: 2rem;
+    @include for-phone-only {
+      padding: 0.5rem;
     }
   }
 
   .simulation-form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .sun-card {
-    height: 300px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(to bottom, var(--color--primary-light), var(--card-bg));
-  }
-
-  .cards-container {
     display: grid;
-    grid-template-columns: repeat(1fr);
-    gap: 2rem;
-    min-height: 600px;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 600px), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
   }
 
   .card {
     background: var(--card-bg);
-    border-radius: 12px;
+    border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
-    padding: 2rem;
+    padding: var(--card-padding);
     height: 100%;
+    border: 1px solid var(--card-border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
 
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.5rem;
-    }
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--card-border);
 
-    h3 {
-      color: var(--text-primary);
-      font-family: var(--font--title);
-      margin: 0;
-      font-size: 1.5rem;
+      h3 {
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        font-weight: 600;
+        color: var(--text-primary);
+      }
     }
   }
 
   .electrodomesticos-list {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 1rem;
-    min-height: 400px;
     max-height: 500px;
     overflow-y: auto;
     padding-right: 0.5rem;
-    margin-bottom: 1.5rem;
-    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--input-bg);
 
     &::-webkit-scrollbar {
-      width: 8px;
+      width: 6px;
     }
 
     &::-webkit-scrollbar-track {
       background: var(--input-bg);
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     &::-webkit-scrollbar-thumb {
       background: var(--primary-color);
-      border-radius: 4px;
+      border-radius: 3px;
     }
   }
 
   .electrodomestico-item {
     display: grid;
-    grid-template-columns: 1.5fr 1fr auto;
+    grid-template-columns: minmax(150px, 1.5fr) minmax(100px, 1fr) auto;
     gap: 1rem;
     align-items: center;
-    padding: 1rem;
-    border-radius: 8px;
+    padding: 0.75rem;
+    border-radius: calc(var(--border-radius) * 0.5);
     background: var(--input-bg);
     transition: all 0.2s ease;
 
-    &:hover {
-      background: var(--hover-bg);
-    }
-  }
+    @include for-phone-only {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: 
+        "nombre borrar"
+        "consumo borrar";
+      gap: 0.5rem;
 
-  .submit-container {
-    display: flex;
-    justify-content: center;
-    
-    .shortcut {
-      margin-left: 0.5rem;
-      font-size: 0.8rem;
-      opacity: 0.8;
-    }
-  }
-
-  .config-content {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .hint {
-      color: var(--text-secondary);
-      font-size: 0.8rem;
-      margin-top: 0.25rem;
+      .input-group:first-child {
+        grid-area: nombre;
+      }
+      .input-group.consumption {
+        grid-area: consumo;
+      }
     }
   }
 
   .input-group {
     position: relative;
-    display: flex;
-    align-items: center;
-
+    
     input {
       width: 100%;
-      padding-right: 3rem;
+      height: var(--input-height);
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--card-border);
+      border-radius: calc(var(--border-radius) * 0.5);
+      background: var(--input-bg);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.1);
+      }
+
+      &:hover:not(:disabled) {
+        border-color: var(--primary-color);
+      }
     }
 
     .unit, .param {
       position: absolute;
       right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       pointer-events: none;
     }
   }
 
-  .consumption {
-    max-width: 150px;
+  .config-content {
+    display: grid;
+    gap: 1.5rem;
   }
 
   .arima-inputs {
@@ -487,63 +448,20 @@ const DEFAULTS = {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 
-    .input-group input {
-      text-align: center;
-      padding-right: 1.5rem;
-    }
-
-    .param {
-      font-style: italic;
+    @include for-phone-only {
+      gap: 0.5rem;
     }
   }
 
-  input {
-    padding: 0.75rem;
-    border: 1px solid var(--card-border);
-    border-radius: 6px;
-    background: var(--input-bg);
-    color: var(--text-primary);
-    font-family: var(--font--default);
-    transition: all 0.2s ease;
-
-    &:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
-    }
-
-    &:hover:not(:disabled) {
-      border-color: var(--primary-color);
-    }
-
-    &:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-  }
-
-  @media (max-width: 1200px) {
-    .cards-container {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .simulation-container {
-      padding: 1rem;
-    }
-
-    .card {
-      padding: 1.5rem;
-    }
-
-    .electrodomestico-item {
-      grid-template-columns: 1fr 1fr auto;
-      padding: 0.75rem;
-    }
+  .submit-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
 
     .shortcut {
-      display: none;
+      @include for-phone-only {
+        display: none;
+      }
     }
   }
-</style> 
+</style>
