@@ -41,16 +41,19 @@
 </script>
 
 <div class="container">
-  <ContentSection title="">
+  <ContentSection>
  
+    <div class="dashboard-wrapper">
+
+
     <div class="header-section">
       <h1>
         Monitor de Consumo Eléctrico en la Casa ZEH 
         <SparklingHighlight/>
       </h1>
     </div>
-  
     <div class="dashboard-layout">
+
       <!-- Panel izquierdo con tarjetas de dispositivos -->
       <div class="side-panel">
         <SparklingHighlight>
@@ -70,6 +73,7 @@
         </div>
       </div>
     </div>
+  </div>
   </ContentSection>
 </div>
 
@@ -93,6 +97,7 @@
 
 	}
   
+
   .container {
     width: 100%;
     max-width: 1800px;
@@ -165,6 +170,21 @@
       min-height: 300px; // Reducimos más en móviles
     }
   }
+   .dashboard-wrapper {
+        position: relative;
+        z-index: 10;
+        transform: translateY(-2rem);
+        animation: float 6s ease-in-out infinite;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+
+        @include for-tablet-portrait-down {
+            transform: translateY(-1rem);
+        }
+
+        @include for-phone-only {
+            transform: translateY(0);
+        }
+    }
 
   .analysis-section {
     width: 100%;

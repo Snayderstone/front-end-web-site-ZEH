@@ -8,14 +8,16 @@
 
 <div class="container">
 	<ContentSection>
-		<div class="header-section">
-			<h1>
-				Optimización de Orientación del panel solar
-				<SparklingHighlight/>
-			</h1>
-		</div>
+
 
 		<div class="card-overlay">
+			<div class="header-section">
+				<h1>
+					Optimización de Orientación del panel solar
+					<SparklingHighlight/>
+				</h1>
+			</div>
+			
 			<SolarTracke />
 		</div>
 

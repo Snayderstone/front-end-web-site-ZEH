@@ -6,15 +6,15 @@
 </script>
 
 <div class="container">
-	<ContentSection>
-	<div class="header-section">
-		<h1>
-			Series de Tiempo, simulador de predicción del próximo consumo energético de una lista de dispositivos. 
-			<SparklingHighlight/>
-		</h1>
-	</div>
 
+	<ContentSection>
 	<div class="card-overlay">
+		<div class="header-section">
+			<h1>
+				Simulador de predicción del próximo consumo energético. 
+				<SparklingHighlight/>
+			</h1>
+		</div>
 		<ElectricConsumption />
 	</div>
 	</ContentSection>

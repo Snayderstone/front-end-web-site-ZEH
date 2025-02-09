@@ -6,13 +6,14 @@
 
 <div class="container">
 	<ContentSection>
+		
+	<div class="card-overlay">
 		<div class="header-section">
 			<h1>
 				Simulador de Optimización del Tamaño del Panel Solar y la Batería
 				<SparklingHighlight/>
 			</h1>
 		</div>
-	<div class="card-overlay">
 		<SolarPanel />
 	</div>
 	</ContentSection>
