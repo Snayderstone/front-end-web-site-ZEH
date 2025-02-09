@@ -61,7 +61,8 @@
                 <a href="/lineal-programing" class="nav-link" on:click={handleLinkClick}>PL</a>
                 <a href="/nonlinear-programing" class="nav-link" on:click={handleLinkClick}>PNL</a>
                 <a href="/time-series" class="nav-link" on:click={handleLinkClick}>ST</a>
-                <a href="/prototype" class="nav-link" on:click={handleLinkClick}>Prototipo</a>
+                <a href="/electrical-generation" class="nav-link" on:click={handleLinkClick}>Generación Casa</a>
+                <a href="/electrical-consumption" class="nav-link" on:click={handleLinkClick}>Consumo Casa</a>
                 <a href="/blog" class="nav-link" on:click={handleLinkClick}>Blog</a>
                 <a href="/aboutUs" class="nav-link" on:click={handleLinkClick}>AboutUs</a>
                 <a href="/contactUs" class="nav-link" on:click={handleLinkClick}>ContactUs</a>

@@ -3,8 +3,8 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { supabase } from '$lib/components/supabase/supabaseClient';
 	import type { RealtimeChannel } from '@supabase/supabase-js';
-	import CurrentDataCard from '$lib/components/prototype/CurrentDataCard.svelte';
-	import HistoricalDataCharts from '$lib/components/prototype/HistoricalDataCharts.svelte';
+	import CurrentDataCard from '$lib/components/electricalgeneration/CurrentDataCard.svelte';
+	import HistoricalDataCharts from '$lib/components/electricalgeneration/HistoricalDataCharts.svelte';
     import SparklingHighlight from '$lib/components/molecules/SparklingHighlight.svelte';
 	export let data;
 	let mediciones = data.mediciones;
@@ -39,7 +39,7 @@
 </script>
 
 <div class="container">
-	<ContentSection title="Monitor Solar Fotovoltaico">
+	<ContentSection title="Monitor de Generación eléctrica en la Casa ZEH">
 		<br>
 		<br>
 		<div class="dashboard-grid">
