@@ -41,10 +41,15 @@
 </script>
 
 <div class="container">
-  <ContentSection title="Monitor de Consumo Eléctrico en la Casa ZEH">
-    <br>
-    <br>
-    <br>
+  <ContentSection title="">
+ 
+    <div class="header-section">
+      <h1>
+        Monitor de Consumo Eléctrico en la Casa ZEH 
+        <SparklingHighlight/>
+      </h1>
+    </div>
+  
     <div class="dashboard-layout">
       <!-- Panel izquierdo con tarjetas de dispositivos -->
       <div class="side-panel">
@@ -71,6 +76,23 @@
 <style lang="scss">
   @import '$lib/scss/breakpoints.scss';
 
+
+  .header-section {
+		text-align: center;
+		margin-bottom: 3rem;
+
+		h1 {
+			font-size: 2.5rem;
+			font-family: var(--font--title);
+			margin-bottom: 1rem;
+			background: linear-gradient(to right, var(--color--text), var(--color--primary));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+	}
+  
   .container {
     width: 100%;
     max-width: 1800px;

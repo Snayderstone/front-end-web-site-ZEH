@@ -39,9 +39,14 @@
 </script>
 
 <div class="container">
-	<ContentSection title="Monitor de Generación eléctrica en la Casa ZEH">
-		<br>
-		<br>
+	<ContentSection>
+		<div class="header-section">
+			<h1>
+				Monitor de Generación eléctrica en la Casa ZEH
+				<SparklingHighlight/>
+			</h1>
+		</div>
+
 		<div class="dashboard-grid">
 
 			 <SparklingHighlight>
@@ -59,6 +64,22 @@
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';
 
+	.header-section {
+		text-align: center;
+		margin-bottom: 3rem;
+
+		h1 {
+			font-size: 2.5rem;
+			font-family: var(--font--title);
+			margin-bottom: 1rem;
+			background: linear-gradient(to right, var(--color--text), var(--color--primary));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+	}
+	
 	.container {
 		max-width: var(--size-content-width);
 		margin: 0 auto;

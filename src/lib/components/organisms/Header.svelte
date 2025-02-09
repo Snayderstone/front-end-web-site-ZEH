@@ -34,6 +34,26 @@
             }
         });
     }
+
+    interface PageLink {
+        href: string;
+        text: string;
+        description: string;
+        shortText?: string; // Para versión móvil
+    }
+
+    const navLinks: PageLink[] = [
+        { href: '/', text: 'Home', description: 'Página de inicio del sitio' },
+        { href: '/monte-carlo-model', text: 'MMC', description: 'Simulador de análisis de inversión' },
+        { href: '/lineal-programing', text: 'PL', description: 'Optimización del tamaño del panel solar y la batería' },
+        { href: '/nonlinear-programing', text: 'PNL', description: 'Optimización de la orientación del panel solar' },
+        { href: '/time-series', text: 'ST', description: 'Predicción del consumo energético de dispositivos' },
+        { href: '/electrical-generation', text: 'Generación', description: 'Datos de generación solar de una casa ZEH' },
+        { href: '/electrical-consumption', text: 'Consumo', description: 'Datos de consumo de una casa ZEH' },
+        { href: '/blog', text: 'Blog', description: 'El blog del sitio web' },
+        { href: '/aboutUs', text: 'Nosotros', description: 'Información sobre el equipo detrás del proyecto' },
+        { href: '/contactUs', text: 'Contacto', description: 'Formulario y enlaces de contacto' }
+    ];
 </script>
 
 <header class:has-background={showBackground}>
@@ -56,16 +76,14 @@
                 <span class="close-icon"></span>
             </button>
             <div class="nav-links">
-                <a href="/" class="nav-link" on:click={handleLinkClick}>Home</a>
-                <a href="/monte-carlo-model" class="nav-link" on:click={handleLinkClick}>MMC</a>
-                <a href="/lineal-programing" class="nav-link" on:click={handleLinkClick}>PL</a>
-                <a href="/nonlinear-programing" class="nav-link" on:click={handleLinkClick}>PNL</a>
-                <a href="/time-series" class="nav-link" on:click={handleLinkClick}>ST</a>
-                <a href="/electrical-generation" class="nav-link" on:click={handleLinkClick}>Generación Casa</a>
-                <a href="/electrical-consumption" class="nav-link" on:click={handleLinkClick}>Consumo Casa</a>
-                <a href="/blog" class="nav-link" on:click={handleLinkClick}>Blog</a>
-                <a href="/aboutUs" class="nav-link" on:click={handleLinkClick}>AboutUs</a>
-                <a href="/contactUs" class="nav-link" on:click={handleLinkClick}>ContactUs</a>
+                {#each navLinks as link}
+                    <div class="nav-item">
+                        <a href={link.href} class="nav-link" on:click={handleLinkClick}>
+                            {link.text}
+                            <span class="tooltip">{link.description}</span>
+                        </a>
+                    </div>
+                {/each}
             </div>
 
             <div class="nav-tools">
@@ -149,10 +167,11 @@
             right: 0;
             height: 100vh; // Altura completa de la ventana
             background: var(--color--card-background);
-            padding: 5rem 1rem 1rem; // Padding superior aumentado para no tapar el header
+            padding: 5rem 1rem 5rem; // Aumentamos el padding inferior
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             border-bottom: 1px solid var(--color--border);
             flex-direction: column;
+            justify-content: space-between; // Distribuye el espacio
             overflow-y: auto; // Añadir scroll vertical
             -webkit-overflow-scrolling: touch; // Mejor scroll en iOS
             z-index: 99; // Menor que el header para que quede debajo
@@ -166,12 +185,92 @@
     .nav-links {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 1.5rem; // Reducido de 2rem
 
         @include for-tablet-portrait-down {
             flex-direction: column;
             align-items: stretch;
             width: 100%;
+            padding: 0.5rem;
+            gap: 0.5rem; // Espaciado reducido en móvil
+            flex: 1;
+            overflow-y: auto; // Permite scroll si hay muchos items
+            padding-bottom: 2rem; // Espacio adicional al final de la lista
+        }
+    }
+
+    .nav-item {
+        position: relative;
+        
+        @include for-tablet-portrait-down {
+            width: 100%;
+            background: var(--color--background);
+            border-radius: 0.5rem;
+            
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+
+        &:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+
+    .tooltip {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        background: var(--color--card-background);
+        color: var(--color--text);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        white-space: nowrap;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 101;
+        pointer-events: none;
+        border: 1px solid var(--color--border);
+        width: max-content;
+        max-width: 300px;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 12px;
+            height: 12px;
+            background: var(--color--card-background);
+            border-left: 1px solid var(--color--border);
+            border-top: 1px solid var(--color--border);
+        }
+
+        @include for-tablet-portrait-down {
+            position: static;
+            transform: none;
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: var(--color--text-shade);
+            background: var(--color--background);
+            box-shadow: none;
+            border: 1px solid var(--color--border);
+            padding: 0.25rem 0.5rem;
+            text-align: center;
+            border-radius: 0.25rem;
+
+            &::before {
+                display: none;
+            }
         }
     }
 
@@ -181,37 +280,67 @@
         font-weight: 500;
         transition: all 0.3s ease;
         position: relative;
-        padding: 0.5rem 0;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
 
-        &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--color--primary);
-            transition: width 0.3s ease;
-        }
-
+        // Eliminamos el background hover para desktop
         &:hover {
             color: var(--color--primary);
+        }
 
+        // Mantenemos la línea inferior en hover solo para desktop
+        @media (min-width: 768px) {
             &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--color--primary);
+                transition: width 0.3s ease;
+            }
+
+            &:hover::after {
                 width: 100%;
             }
         }
 
         @include for-tablet-portrait-down {
-            display: block;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            text-align: center;
+        display: flex;
+        flex-direction: column; // Cambiado de row a column
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        gap: 0.5rem;
 
-            &:hover {
-                background: var(--color--primary-tint);
+        // Mantenemos el background hover solo para móvil
+        &:hover {
+            background: var(--color--primary-tint);
+        }
+
+        // Estilos del tooltip en móvil
+        .tooltip {
+            font-size: 0.75rem;
+            color: var(--color--text-shade);
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            box-shadow: none;
+            position: static;
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+            max-width: none;
+            width: 100%; // Cambiado de auto a 100%
+            text-align: center; // Centrar el texto
+            
+            &::before {
+                display: none;
             }
         }
+    }
     }
 
     .nav-tools {
@@ -223,9 +352,13 @@
             width: 100%;
             justify-content: center;
             padding: 1rem;
-            margin-top: auto; // Empuja los botones hacia abajo
+            margin-top: 0rem; // Añadimos margen superior
+            margin-bottom: 0rem; // Añadimos margen inferior significativo
             border-top: 1px solid var(--color--border);
             background: var(--color--card-background);
+            position: sticky; // Hacemos que se mantenga visible
+            bottom: 0;
+            z-index: 2;
         }
     }
 

@@ -2,12 +2,19 @@
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
 	import SolarTracke from '$lib/components/nonlinearprogramming/SolarTracke.svelte';
 	import OptimizerSpDirection from '$lib/components/nonlinearprogramming/OptimizerSPDirection.svelte';
+	import SparklingHighlight from '$lib/components/molecules/SparklingHighlight.svelte';
 </script>
 
+
 <div class="container">
-	<ContentSection title="Optimización de Orientación del panel solar">
-		<br>
-		<br>
+	<ContentSection>
+		<div class="header-section">
+			<h1>
+				Optimización de Orientación del panel solar
+				<SparklingHighlight/>
+			</h1>
+		</div>
+
 		<div class="card-overlay">
 			<SolarTracke />
 		</div>
@@ -24,6 +31,21 @@
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';
 
+	.header-section {
+		text-align: center;
+		margin-bottom: 3rem;
+
+		h1 {
+			font-size: 2.5rem;
+			font-family: var(--font--title);
+			margin-bottom: 1rem;
+			background: linear-gradient(to right, var(--color--text), var(--color--primary));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+	}
 	.card-overlay {
 		position: relative;
 		z-index: 10;

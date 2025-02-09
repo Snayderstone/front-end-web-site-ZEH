@@ -1,12 +1,17 @@
 <script lang="ts">
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
 	import SolarPanel from '$lib/components/lenarprogramming/SolarPanel.svelte';
+	import SparklingHighlight from '$lib/components/molecules/SparklingHighlight.svelte';
 </script>
 
 <div class="container">
-	<ContentSection title="Simulador de Optimización del Tamaño del Panel Solar y la Batería">
-	<br />
-	<br />
+	<ContentSection>
+		<div class="header-section">
+			<h1>
+				Simulador de Optimización del Tamaño del Panel Solar y la Batería
+				<SparklingHighlight/>
+			</h1>
+		</div>
 	<div class="card-overlay">
 		<SolarPanel />
 	</div>
@@ -16,6 +21,22 @@
 
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';
+
+	.header-section {
+		text-align: center;
+		margin-bottom: 3rem;
+
+		h1 {
+			font-size: 2.5rem;
+			font-family: var(--font--title);
+			margin-bottom: 1rem;
+			background: linear-gradient(to right, var(--color--text), var(--color--primary));
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+	}
 
 	.card-overlay {
 		position: relative;

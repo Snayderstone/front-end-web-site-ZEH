@@ -11,7 +11,7 @@
 		<div class="header-section">
 			<h1>
 				Simulador de Inversión
-				<SparklingHighlight>Solar</SparklingHighlight>
+				<SparklingHighlight/>
 			</h1>
 		</div>
 
