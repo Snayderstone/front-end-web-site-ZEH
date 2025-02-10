@@ -9,6 +9,7 @@
 	import SolarPanelVisualization from './SolarPanelVisualization.svelte';
 	import BatteryVisualization from './BatteryVisualization.svelte';
 	import ChargeStateChart from './ChargeStateChart.svelte';
+	import { onMount } from 'svelte';
 	// Tipamos el resultado y el error
 	let resultado: OptimizationResults | null = null;
 	let error: string | null = null;
@@ -36,6 +37,10 @@
 	// Inicializamos formData con el tipo correcto
 	let formData: SolarSystemConfig = { ...initialData };
 
+	// Añadimos un estado para controlar la carga
+	let isLoading = false;
+	let key = 0; // Para forzar la recreación de componentes
+
 	function generarDatosAleatorios(): void {
 		formData.generacion_solar = Array.from({ length: formData.K }, () =>
 			parseFloat(
@@ -57,6 +62,8 @@
 
 	async function enviarDatos(): Promise<void> {
 		try {
+			isLoading = true;
+			key++; // Incrementamos la key para forzar recreación
 			generarDatosAleatorios();
 
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/modulo1/`, {
@@ -75,6 +82,8 @@
 		} catch (e) {
 			resultado = null;
 			error = e instanceof Error ? e.message : 'Error desconocido';
+		} finally {
+			isLoading = false;
 		}
 	}
 
@@ -102,24 +111,36 @@
 			<div class="form-section">
 				<h3>Parámetros del Sistema</h3>
 				<div class="form-group">
-					<label for="K">Períodos de tiempo (K):</label>
+					<label for="K" class="label-with-tooltip">
+						Días de Simulación:
+						<span class="tooltip">Número de días para simular el comportamiento del sistema</span>
+					</label>
 					<input type="number" id="K" bind:value={formData.K} min="1" max="100" />
 				</div>
 				<div class="form-group">
-					<label for="X_max">Capacidad máxima (X_max):</label>
+					<label for="X_max" class="label-with-tooltip">
+						Área Disponible (m²):
+						<span class="tooltip">Espacio máximo disponible para la instalación de paneles solares</span>
+					</label>
 					<input type="number" id="X_max" bind:value={formData.X_max} min="1" />
 				</div>
 			</div>
 
 			<!-- Costos -->
 			<div class="form-section">
-				<h3>Parámetros de Costo</h3>
+				<h3>Costos del Sistema</h3>
 				<div class="form-group">
-					<label for="c1">Costo panel (c1):</label>
+					<label for="c1" class="label-with-tooltip">
+						Costo Panel ($/m²):
+						<span class="tooltip">Costo por metro cuadrado de panel solar instalado</span>
+					</label>
 					<input type="number" id="c1" bind:value={formData.c1} min="0" />
 				</div>
 				<div class="form-group">
-					<label for="c2">Costo batería (c2):</label>
+					<label for="c2" class="label-with-tooltip">
+						Costo Batería ($/kWh):
+						<span class="tooltip">Costo por kilovatio-hora de capacidad de almacenamiento</span>
+					</label>
 					<input type="number" id="c2" bind:value={formData.c2} min="0" />
 				</div>
 			</div>
@@ -128,12 +149,18 @@
 			<div class="form-section">
 				<h3>Parámetros de Eficiencia</h3>
 				<div class="form-group">
-					<label for="c3">Eficiencia panel (c3):</label>
+					<label for="c3" class="label-with-tooltip">
+						Beneficio Energía Excedente:
+						<span class="tooltip">Tarifa que se recibe por cada kWh de energía sobrante enviada a la red</span>
+					</label>
 					<input type="range" id="c3" bind:value={formData.c3} min="0" max="1" step="0.01" />
 					<span class="value-display">{(formData.c3 * 100).toFixed(1)}%</span>
 				</div>
 				<div class="form-group">
-					<label for="c4">Eficiencia batería (c4):</label>
+					<label for="c4" class="label-with-tooltip">
+						Costo Energía Alternativa:
+						<span class="tooltip">Costo por kWh de usar fuentes alternativas cuando no hay energía solar</span>
+					</label>
 					<input type="range" id="c4" bind:value={formData.c4} min="0" max="1" step="0.01" />
 					<span class="value-display">{(formData.c4 * 100).toFixed(1)}%</span>
 				</div>
@@ -200,7 +227,13 @@
 
 			<!-- ... en la sección de resultados ... -->
 			<div class="visualizations-grid">
-				<div class="visualization-wrapper">
+				{#key key}
+				<div class="visualization-wrapper" class:is-loading={isLoading}>
+					{#if isLoading}
+						<div class="loading-overlay">
+							<div class="loading-spinner"></div>
+						</div>
+					{/if}
 					<SolarPanelVisualization width="100%" height="400px" showEffects={true} panelSize={12} />
 					<div class="result-overlay">
 						<div class="result-item">
@@ -210,7 +243,12 @@
 					</div>
 				</div>
 
-				<div class="visualization-wrapper">
+				<div class="visualization-wrapper" class:is-loading={isLoading}>
+					{#if isLoading}
+						<div class="loading-overlay">
+							<div class="loading-spinner"></div>
+						</div>
+					{/if}
 					<BatteryVisualization width="100%" height="400px" chargeLevel={75} />
 					<div class="result-overlay">
 						<div class="result-item">
@@ -219,11 +257,14 @@
 						</div>
 					</div>
 				</div>
+				{/key}
 			</div>
 
 			<div class="chart-section">
 				<h3>Estados de Carga por Período</h3>
+				{#key key}
 				<ChargeStateChart data={resultado.results.Estado_Carga_kWh} />
+				{/key}
 			</div>
 		</div>
 	{/if}
@@ -405,6 +446,35 @@
 		&:hover {
 			transform: translateY(-5px);
 		}
+
+		&.is-loading {
+			opacity: 0.7;
+			pointer-events: none;
+		}
+	}
+
+	.loading-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(var(--color--background-rgb), 0.7);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 10;
+	}
+
+	.loading-spinner {
+		width: 40px;
+		height: 40px;
+		border: 4px solid var(--color--primary);
+		border-top-color: transparent;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
 	}
 
 	.result-overlay {

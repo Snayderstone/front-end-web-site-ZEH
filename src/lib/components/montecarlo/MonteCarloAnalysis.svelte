@@ -95,13 +95,21 @@
     <div class="simulation-form" in:slide={{ duration: 300, axis: 'y' }} out:slide={{ duration: 300, axis: 'y' }}>
       <h3>Parámetros de Simulación</h3>
       <div class="form-grid">
-        <div class="form-group">
-          <label for="region">Región</label>
-          <select id="region" bind:value={simulationInput.region}>
+        <div class="form-group region-group">
+          <label id="region-label" for="region-group">Región</label>
+          <div id="region-group" class="radio-group" role="radiogroup" aria-labelledby="region-label">
             {#each regiones as region}
-              <option value={region}>{region}</option>
+              <label class="radio-label">
+                <input
+                  type="radio"
+                  name="region"
+                  value={region}
+                  bind:group={simulationInput.region}
+                />
+                <span class="radio-text">{region}</span>
+              </label>
             {/each}
-          </select>
+          </div>
         </div>
 
         <div class="form-group">
@@ -433,6 +441,7 @@
   }
 
   .simulation-form {
+    // ...existing styles...
     background: var(--color--card-background);
     border-radius: 1rem;
     padding: 2rem;
@@ -453,16 +462,18 @@
     }
 
     .form-group {
+      // ...existing styles...
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
 
       label {
-        color: var(--color--text-shade);
-        font-size: 0.9rem;
+        color: var(--color--text);
+        font-weight: 500;
+        margin-bottom: 0.75rem;
       }
 
-      input, select {
+      input {
         padding: 0.75rem;
         border: 1px solid var(--color--border);
         border-radius: 0.5rem;
@@ -506,4 +517,50 @@
       }
     }
   }
-</style> 
+
+  .region-group {
+    .radio-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .radio-label {
+        position: relative;
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        background: var(--color--background);
+        border: 1px solid var(--color--border);
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            border-color: var(--color--primary);
+        }
+
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            &:checked + .radio-text {
+                color: var(--color--primary);
+                font-weight: 600;
+            }
+
+        }
+
+        .radio-text {
+            color: var(--color--text);
+            font-size: 0.9rem;
+            text-align: center;
+            width: 100%;
+            transition: color 0.2s ease;
+        }
+    }
+  }
+</style>

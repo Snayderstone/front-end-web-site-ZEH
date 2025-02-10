@@ -7,12 +7,12 @@
 	import Sparkles from '$lib/components/atoms/Sparkles.svelte';
 	import SolarCharts from './SolarCharts.svelte';
 
-	// Configuración inicial del panel solar
+	// Configuración inicial actualizada
 	const initialConfig: SolarPanelConfig = {
 		area: 10,
-		efficiency: 0.2,
-		avgRadiation: 5.5,
-		sunHours: 12
+		efficiency: 0.15, // Valor inicial más realista
+		avgRadiation: 4.5, // Valor promedio para Ecuador
+		sunHours: 11 // Valor típico para Ecuador (6:00-17:00)
 	};
 
 	// Estados de la aplicación usando stores
@@ -24,20 +24,43 @@
 	// Estado del formulario
 	let formData = { ...initialConfig };
 
-	// Constantes y validación
+	// Constantes y validación actualizadas
 	const API_URL = import.meta.env.VITE_API_URL || 'https://fuzzy-guacamole-5xv5r54px5rc4rxq-5000.app.github.dev/api/v1/modulo2/';
 	const CONSTRAINTS = {
-		area: { min: 0, max: 100, step: 0.1 },
-		efficiency: { min: 0, max: 1, step: 0.01 },
-		radiation: { min: 0, max: 12, step: 0.1 },
-		sunHours: { min: 0, max: 24, step: 1 }
+		area: { 
+			min: 0, 
+			max: 100, 
+			step: 0.1,
+			help: "El área típica para instalaciones domésticas varía entre 0 y 100 m²"
+		},
+		efficiency: { 
+			min: 0.15, 
+			max: 0.20, 
+			step: 0.01,
+			help: "La eficiencia típica de paneles solares está entre 15% y 20%"
+		},
+		radiation: { 
+			min: 3.5, 
+			max: 10, // Ajustado al máximo registrado en Ecuador
+			step: 0.1,
+			help: "La radiación solar en Ecuador varía entre 3.5 y 10 kWh/m²/día"
+		},
+		sunHours: { 
+			min: 1, 
+			max: 13, 
+			step: 1,
+			help: "Considera el período de luz solar efectiva (típicamente 6:00-18:00)"
+		}
 	};
 
-	// Validación del formulario
+	// Validación del formulario mejorada
 	$: isValid =
 		formData.area > CONSTRAINTS.area.min &&
+		formData.efficiency >= CONSTRAINTS.efficiency.min &&
 		formData.efficiency <= CONSTRAINTS.efficiency.max &&
+		formData.avgRadiation >= CONSTRAINTS.radiation.min &&
 		formData.avgRadiation <= CONSTRAINTS.radiation.max &&
+		formData.sunHours >= CONSTRAINTS.sunHours.min &&
 		formData.sunHours <= CONSTRAINTS.sunHours.max;
 
 	// Estado para controlar la expansión de resultados
@@ -110,6 +133,11 @@
 	}
 
 	const formatNumber = (num: number): string => num.toFixed(2);
+
+	// Función para calcular el porcentaje de la barra de progreso
+	const calculateProgress = (value: number, min: number, max: number): number => {
+		return ((value - min) / (max - min)) * 100;
+	};
 </script>
 
 <div class="optimizer-container" in:fade>
@@ -119,21 +147,28 @@
 		in:fly={{ y: 20, duration: 600 }}
 	>
 		<div class="form-group">
-			<label for="area">Área del panel solar (m²)</label>
+			<label for="area">
+				Área del panel solar (m²)
+				<span class="help-text">{CONSTRAINTS.area.help}</span>
+			</label>
 			<input
-				type="number"
+				type="range"
 				id="area"
 				bind:value={formData.area}
 				min={CONSTRAINTS.area.min}
 				max={CONSTRAINTS.area.max}
 				step={CONSTRAINTS.area.step}
 				required
-				class="form-input"
+				class="slider"
 			/>
+			<span class="value-display">{formData.area} m²</span>
 		</div>
 
 		<div class="form-group">
-			<label for="efficiency">Eficiencia del panel</label>
+			<label for="efficiency">
+				Eficiencia del panel
+				<span class="help-text">{CONSTRAINTS.efficiency.help}</span>
+			</label>
 			<input
 				type="range"
 				id="efficiency"
@@ -148,21 +183,28 @@
 		</div>
 
 		<div class="form-group">
-			<label for="avgRadiation">Radiación solar promedio diaria (kWh/m²)</label>
+			<label for="avgRadiation">
+				Radiación solar promedio diaria (kWh/m²)
+				<span class="help-text">{CONSTRAINTS.radiation.help}</span>
+			</label>
 			<input
-				type="number"
+				type="range"
 				id="avgRadiation"
 				bind:value={formData.avgRadiation}
 				min={CONSTRAINTS.radiation.min}
 				max={CONSTRAINTS.radiation.max}
 				step={CONSTRAINTS.radiation.step}
 				required
-				class="form-input"
+				class="slider"
 			/>
+			<span class="value-display">{formData.avgRadiation} kWh/m²</span>
 		</div>
 
 		<div class="form-group">
-			<label for="sunHours">Duración del día (horas)</label>
+			<label for="sunHours">
+				Duración del día (horas)
+				<span class="help-text">{CONSTRAINTS.sunHours.help}</span>
+			</label>
 			<input
 				type="range"
 				id="sunHours"
@@ -173,7 +215,7 @@
 				required
 				class="slider"
 			/>
-			<span class="value-display">{formData.sunHours} horas</span>
+			<span class="value-display">{formData.sunHours} horas ({6 + Math.floor((formData.sunHours - 1) / 2)}:00 - {17 + Math.ceil((formData.sunHours - 11) / 2)}:00)</span>
 		</div>
 
 		<div class="button-group">
@@ -203,7 +245,7 @@
 				>
 					<path
 						fill-rule="evenodd"
-						d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+						d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 101.414 1.414L10 11.414l1.293 1.293a1 1 001.414-1.414L11.414 10l1.293-1.293a1 1 00-1.414-1.414L10 8.586 8.707 7.293z"
 						clip-rule="evenodd"
 					/>
 				</svg>
@@ -253,7 +295,7 @@
 							>
 								<path
 									fill-rule="evenodd"
-									d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+									d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 011.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 010-1.414z"
 									clip-rule="evenodd"
 								/>
 							</svg>
@@ -307,36 +349,55 @@
 			font-weight: 500;
 			color: var(--color--text);
 		}
-	}
 
-	.form-input {
-		width: 100%;
-		padding: 0.75rem;
-		border: 1px solid var(--color--border);
-		border-radius: 0.5rem;
-		background: var(--color--input-background);
-		color: var(--color--text);
-		font-size: 1rem;
-		transition: all 0.2s ease;
-
-		&:focus {
-			outline: none;
-			border-color: var(--color--primary);
-			box-shadow: 0 0 0 2px rgba(var(--color--primary-rgb), 0.2);
+		.help-text {
+			display: block;
+			font-size: 0.85rem;
+			color: var(--color--text-shade);
+			margin-top: 0.25rem;
+			font-weight: normal;
 		}
 	}
+
+
 
 	.slider {
 		width: 100%;
-		margin: 0.5rem 0;
-		accent-color: var(--color--primary);
-
+		height: 6px;
+		-webkit-appearance: none;
+		appearance: none;
+		background: var(--color--border);
+		border-radius: 3px;
+		outline: none;
+		margin: 1rem 0;
+		
 		&::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 18px;
+			height: 18px;
 			background: var(--color--primary);
+			border-radius: 50%;
+			cursor: pointer;
+			transition: transform 0.2s ease;
+
+			&:hover {
+				transform: scale(1.1);
+			}
 		}
 
 		&::-moz-range-thumb {
+			width: 18px;
+			height: 18px;
 			background: var(--color--primary);
+			border: none;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: transform 0.2s ease;
+
+			&:hover {
+				transform: scale(1.1);
+			}
 		}
 	}
 
@@ -345,6 +406,7 @@
 		text-align: center;
 		font-size: 0.9rem;
 		color: var(--color--text-shade);
+		margin-top: 0.5rem;
 	}
 
 	.button-group {
@@ -510,4 +572,7 @@
 			transform: translateY(0);
 		}
 	}
+
+
+
 </style>

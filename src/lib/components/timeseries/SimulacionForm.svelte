@@ -21,13 +21,7 @@ const DEFAULTS = {
   electrodomesticos_default: [
     { nombre: "Aire acondicionado", consumo: 1.5 },
     { nombre: "Televisor", consumo: 0.1 },
-    { nombre: "Refrigeradora", consumo: 1.2 },
-    { nombre: "Bombillas LED", consumo: 0.01 },
-    { nombre: "Lavadora", consumo: 0.5 },
-    { nombre: "Secadora", consumo: 2.0 },
-    { nombre: "Microondas", consumo: 0.9 },
-    { nombre: "Computadora de escritorio", consumo: 0.2 },
-    { nombre: "Cargador de teléfono", consumo: 0.01 }
+    { nombre: "Refrigeradora", consumo: 1.2 }
   ]
 };
 

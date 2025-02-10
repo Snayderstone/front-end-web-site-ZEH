@@ -229,7 +229,7 @@
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
         font-size: 0.875rem;
-        white-space: nowrap;
+
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         opacity: 0;
         visibility: hidden;
