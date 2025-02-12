@@ -263,7 +263,11 @@
 			<div class="chart-section">
 				<h3>Estados de Carga por Período</h3>
 				{#key key}
-				<ChargeStateChart data={resultado.results.Estado_Carga_kWh} />
+				<ChargeStateChart data={{
+					Consumo_Energetico_kWh: formData.consumo_energia,
+					Estado_Carga_kWh: resultado.results.Estado_Carga_kWh,
+					Generacion_Solar_kWh_m2: formData.generacion_solar} } />
+
 				{/key}
 			</div>
 		</div>
