@@ -28,12 +28,6 @@
 		consumo_energia: []
 	};
 
-	// Rangos
-	let generacion_solar_min = 4.0;
-	let generacion_solar_max = 6.0;
-	let consumo_energia_min = 9.0;
-	let consumo_energia_max = 12.0;
-
 	// Inicializamos formData con el tipo correcto
 	let formData: SolarSystemConfig = { ...initialData };
 
@@ -41,30 +35,10 @@
 	let isLoading = false;
 	let key = 0; // Para forzar la recreación de componentes
 
-	function generarDatosAleatorios(): void {
-		formData.generacion_solar = Array.from({ length: formData.K }, () =>
-			parseFloat(
-				(
-					Math.random() * (generacion_solar_max - generacion_solar_min) +
-					generacion_solar_min
-				).toFixed(2)
-			)
-		);
-
-		formData.consumo_energia = Array.from({ length: formData.K }, () =>
-			parseFloat(
-				(Math.random() * (consumo_energia_max - consumo_energia_min) + consumo_energia_min).toFixed(
-					2
-				)
-			)
-		);
-	}
-
 	async function enviarDatos(): Promise<void> {
 		try {
 			isLoading = true;
 			key++; // Incrementamos la key para forzar recreación
-			generarDatosAleatorios();
 
 			const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/modulo1/`, {
 				method: 'POST',
@@ -91,10 +65,7 @@
 		formData = { ...initialData };
 		resultado = null;
 		error = null;
-		generacion_solar_min = 4.0;
-		generacion_solar_max = 6.0;
-		consumo_energia_min = 9.0;
-		consumo_energia_max = 12.0;
+
 	}
 </script>
 
@@ -165,52 +136,6 @@
 					<span class="value-display">{(formData.c4 * 100).toFixed(1)}%</span>
 				</div>
 			</div>
-
-			<!-- svelte-ignore a11y-label-has-associated-control -->
-			<!-- Rangos de Generación -->
-			<div class="form-section">
-				<h3>Rangos de Generación Solar</h3>
-				<div class="form-group range-group">
-					<label>Generación Solar (kWh):</label>
-					<div class="range-inputs">
-						<input
-							type="number"
-							bind:value={generacion_solar_min}
-							step="0.1"
-							min="0"
-							placeholder="Mín"
-						/>
-						<span>a</span>
-						<input
-							type="number"
-							bind:value={generacion_solar_max}
-							step="0.1"
-							min="0"
-							placeholder="Máx"
-						/>
-					</div>
-				</div>
-				<div class="form-group range-group">
-					<label>Consumo de Energía (kWh):</label>
-					<div class="range-inputs">
-						<input
-							type="number"
-							bind:value={consumo_energia_min}
-							step="0.1"
-							min="0"
-							placeholder="Mín"
-						/>
-						<span>a</span>
-						<input
-							type="number"
-							bind:value={consumo_energia_max}
-							step="0.1"
-							min="0"
-							placeholder="Máx"
-						/>
-					</div>
-				</div>
-			</div>
 		</div>
 
 		<div class="button-group">
@@ -264,9 +189,9 @@
 				<h3>Estados de Carga por Período</h3>
 				{#key key}
 				<ChargeStateChart data={{
-					Consumo_Energetico_kWh: formData.consumo_energia,
+					Consumo_Energetico_kWh: resultado.results.Consumo_Energetico_kWh,
 					Estado_Carga_kWh: resultado.results.Estado_Carga_kWh,
-					Generacion_Solar_kWh_m2: formData.generacion_solar} } />
+					Generacion_Solar_kWh_m2: resultado.results.Generacion_Solar_kWh_m2} } />
 
 				{/key}
 			</div>
@@ -366,18 +291,7 @@
 		margin-top: 0.25rem;
 	}
 
-	.range-group {
-		.range-inputs {
-			display: grid;
-			grid-template-columns: 1fr auto 1fr;
-			gap: 0.5rem;
-			align-items: center;
 
-			span {
-				color: var(--color--text-shade);
-			}
-		}
-	}
 
 	.button-group {
 		display: flex;

@@ -17,5 +17,8 @@ export interface SolarSystemConfig {
       Area_Panel_m2: number;
       Capacidad_Bateria_kWh: number;
       Estado_Carga_kWh: number[];
+      Consumo_Energetico_kWh: number[];
+      Generacion_Solar_kWh_m2: number[];
+
     };
   }
