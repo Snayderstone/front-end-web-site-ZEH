@@ -37,7 +37,7 @@
       <div class="kpi-container">
         <div class="kpi">
           <span class="label">Consumo Total</span>
-          <span class="value">{totalConsumption.toLocaleString()} W</span>
+          <span class="value">{totalConsumption.toLocaleString()} W/s</span>
         </div>
         <div class="kpi">
           <span class="label">Dispositivos Activos</span>
@@ -55,7 +55,7 @@
               <span class="device-name">{device.name}</span>
               <span class="device-consumption">
                 {#if medicion[device.field]}
-                  <span class="consumption-active">⚡ {device.consumption}W</span>
+                  <span class="consumption-active">⚡ {device.consumption} W/s</span>
                 {:else}
                   <span class="consumption-inactive">💤 Inactivo</span>
                 {/if}

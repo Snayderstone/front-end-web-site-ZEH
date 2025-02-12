@@ -71,7 +71,7 @@
                 top: 10,
                 bottom: 20
               },
-              color: 'var(--color--text)'
+              color: '#f472b6'
             },
             legend: {
               position: 'top',
@@ -79,7 +79,7 @@
               labels: {
                 usePointStyle: true,
                 padding: 20,
-                color: 'var(--color--text-shade)'
+                color: '#808080'
               }
             }
           },

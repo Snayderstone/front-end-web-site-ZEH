@@ -69,7 +69,7 @@
                             top: 10,
                             bottom: 20
                         },
-                        color: 'var(--color--text)'
+                        color: '#f472b6'
                     },
                     legend: {
                         position: 'top'
