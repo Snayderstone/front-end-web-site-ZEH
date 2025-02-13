@@ -50,22 +50,21 @@
     ];
 
     const modelLinks: PageLink[] = [
-        { href: '/monte-carlo-model', text: 'MMC', description: 'Simulador de análisis de inversión' },
-        { href: '/lineal-programing', text: 'PL', description: 'Optimización del tamaño del panel solar y la batería' },
-        { href: '/nonlinear-programing', text: 'PNL', description: 'Optimización de la orientación del panel solar' },
-        { href: '/time-series', text: 'ST', description: 'Predicción del consumo energético de dispositivos' },
+        { href: '/monte-carlo-model', text: 'Modelos de Decisión', description: 'Simulador de análisis de inversión' },
+        { href: '/lineal-programing', text: 'Programación lineal', description: 'Optimización del tamaño del panel solar y la batería' },
+        { href: '/nonlinear-programing', text: 'Programación No Lineal', description: 'Optimización de la orientación del panel solar' },
+        { href: '/time-series', text: 'Series de Tiempo', description: 'Predicción del consumo energético de dispositivos' },
         { href: '/electrical-generation', text: 'Generación', description: 'Datos de generación solar de una casa ZEH' },
         { href: '/electrical-consumption', text: 'Consumo', description: 'Datos de consumo de una casa ZEH' }
     ];
 
-    let selectedOption = modelLinks[0].href; // Opción seleccionada por defecto
+    let selectedOption = ''; // Ahora el valor por defecto es vacío
 
     function navigateToOption() {
-        if (selectedOption) {
+        if (selectedOption && selectedOption !== '') {
             window.location.href = selectedOption;
         }
     }
-
 
 
 </script>
@@ -103,11 +102,13 @@
             </div>
 
             <div class="nav-tools">
-                <select bind:value={selectedOption} on:change={navigateToOption} class="combo-box">
+                <select bind:value={selectedOption} class="combo-box" on:change={navigateToOption}>
+                    <option value="">Modelos</option> <!-- Opción inicial -->
                     {#each modelLinks as option}
                         <option value={option.href}>{option.text}</option>
                     {/each}
                 </select>
+
                 <Building />
                 <GitHubIcons />
                 <ThemeToggle />
