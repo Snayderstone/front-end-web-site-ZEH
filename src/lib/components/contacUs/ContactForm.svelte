@@ -69,7 +69,7 @@
       in:fly={{ y: 20, duration: 600, delay: 200 }}
     >
       <div class="form-group">
-        <label for="nombre">Nombre</label>
+        <label for="nombre">Nombre:</label>
         <input 
           type="text" 
           id="nombre"
@@ -79,7 +79,7 @@
       </div>
   
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="email">Email:</label>
         <input 
           type="email" 
           id="email"
@@ -89,7 +89,7 @@
       </div>
   
       <div class="form-group">
-        <label for="asunto">Asunto</label>
+        <label for="asunto">Asunto:</label>
         <input 
           type="text" 
           id="asunto"
@@ -99,7 +99,7 @@
       </div>
   
       <div class="form-group">
-        <label for="mensaje">Mensaje</label>
+        <label for="mensaje">Mensaje:</label>
         <textarea 
           id="mensaje"
           bind:value={formData.mensaje}
@@ -194,7 +194,7 @@
       background: var(--color--card-background);
       padding: 2rem;
       border-radius: 1rem;
-      border: 1px solid var(--color--border);
+      border: 2px solid var(--color--text);
       box-shadow: var(--card-shadow);
     }
   
@@ -211,7 +211,7 @@
       textarea {
         width: 100%;
         padding: 0.75rem;
-        border: 1px solid var(--color--border, #ccc);
+        border: 2px solid var(--color--text);
         border-radius: 0.5rem;
         background: var(--color--background);
         color: var(--color--text);
@@ -221,7 +221,7 @@
         &:focus {
           outline: none;
           border-color: var(--color--primary, #6200ea);
-          box-shadow: 0 0 0 5px var(--color--primary-transparent, #6200ea);
+          box-shadow: 0 0 0 4px var(--color--primary-transparent, rgba(98, 0, 234, 0.5));
         }
       }
     }
@@ -257,4 +257,5 @@
         padding: 1.5rem;
       }
     }
+
   </style>

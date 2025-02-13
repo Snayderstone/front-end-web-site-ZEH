@@ -11,12 +11,12 @@
 	<div class="content">
 		<div class="copyright">
 			Facultad de Ingeniería y Ciencias Aplicadas -
-			<a href="https://www.uce.edu.ec/web/fing" target="_blank" rel="noopener noreferrer">Universidad Central del Ecuador</a>.
+			<a href="https://www.uce.edu.ec/" target="_blank" rel="noopener noreferrer">Universidad Central del Ecuador</a>.
 		</div>
 		
 		<div class="credits">
 			Proyecto desarrollado por estudiantes de la Carrera de 
-			<a href="https://www.uce.edu.ec/" target="_blank" rel="noopener noreferrer">Sistemas de Información </a>.
+			<a href="https://www.uce.edu.ec/web/fing" target="_blank" rel="noopener noreferrer">Sistemas de Información</a>.
 		</div>
 		<div class="socials">
 			<Socials />

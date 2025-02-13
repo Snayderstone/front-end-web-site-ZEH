@@ -44,16 +44,30 @@
 
     const navLinks: PageLink[] = [
         { href: '/', text: 'Home', description: 'Página de inicio del sitio' },
+        { href: '/blog', text: 'Blog', description: 'El blog del sitio web' },
+        { href: '/aboutUs', text: 'Nosotros', description: 'Información sobre el equipo detrás del proyecto' },
+        { href: '/contactUs', text: 'Contacto', description: 'Formulario y enlaces de contacto' }
+    ];
+
+    const modelLinks: PageLink[] = [
         { href: '/monte-carlo-model', text: 'MMC', description: 'Simulador de análisis de inversión' },
         { href: '/lineal-programing', text: 'PL', description: 'Optimización del tamaño del panel solar y la batería' },
         { href: '/nonlinear-programing', text: 'PNL', description: 'Optimización de la orientación del panel solar' },
         { href: '/time-series', text: 'ST', description: 'Predicción del consumo energético de dispositivos' },
         { href: '/electrical-generation', text: 'Generación', description: 'Datos de generación solar de una casa ZEH' },
-        { href: '/electrical-consumption', text: 'Consumo', description: 'Datos de consumo de una casa ZEH' },
-        { href: '/blog', text: 'Blog', description: 'El blog del sitio web' },
-        { href: '/aboutUs', text: 'Nosotros', description: 'Información sobre el equipo detrás del proyecto' },
-        { href: '/contactUs', text: 'Contacto', description: 'Formulario y enlaces de contacto' }
+        { href: '/electrical-consumption', text: 'Consumo', description: 'Datos de consumo de una casa ZEH' }
     ];
+
+    let selectedOption = modelLinks[0].href; // Opción seleccionada por defecto
+
+    function navigateToOption() {
+        if (selectedOption) {
+            window.location.href = selectedOption;
+        }
+    }
+
+
+
 </script>
 
 <header class:has-background={showBackground}>
@@ -78,19 +92,27 @@
             <div class="nav-links">
                 {#each navLinks as link}
                     <div class="nav-item">
-                        <a href={link.href} class="nav-link" on:click={handleLinkClick}>
+                        <a href={link.href} class="nav-link "
+                         on:click={handleLinkClick}>
                             {link.text}
                             <span class="tooltip">{link.description}</span>
                         </a>
                     </div>
                 {/each}
+
             </div>
 
             <div class="nav-tools">
+                <select bind:value={selectedOption} on:change={navigateToOption} class="combo-box">
+                    {#each modelLinks as option}
+                        <option value={option.href}>{option.text}</option>
+                    {/each}
+                </select>
                 <Building />
                 <GitHubIcons />
                 <ThemeToggle />
             </div>
+
         </div>
     </nav>
 </header>
@@ -184,8 +206,9 @@
 
     .nav-links {
         display: flex;
-        align-items: center;
-        gap: 1.5rem; // Reducido de 2rem
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem; // Reducido de 2rem
 
         @include for-tablet-portrait-down {
             flex-direction: column;
@@ -201,6 +224,7 @@
 
     .nav-item {
         position: relative;
+        text-align: center;
         
         @include for-tablet-portrait-down {
             width: 100%;
@@ -281,12 +305,23 @@
         transition: all 0.3s ease;
         position: relative;
         padding: 0.5rem;
-        border-radius: 0.5rem;
+        border-radius: 0.5px;
 
         // Eliminamos el background hover para desktop
         &:hover {
             color: var(--color--primary);
         }
+
+        // Resaltar la pestaña activa con fondo y subrayado
+        &.active {
+            font-weight: bold;
+            color: var(--color--primary); /* Cambia el color del texto */
+            border-bottom: 3px solid var(--color--primary); /* Agrega una línea de subrayado */
+            background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
 
         // Mantenemos la línea inferior en hover solo para desktop
         @media (min-width: 768px) {
@@ -469,4 +504,22 @@
             }
         }
     }
+
+    .combo-box {
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid var(--color--border);
+        border-radius: 5px;
+        background: var(--color--card-background);
+        color: var(--color--text);
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    .combo-box:focus {
+        outline: none;
+        border-color: var(--color--primary);
+    }
+
+
 </style>
