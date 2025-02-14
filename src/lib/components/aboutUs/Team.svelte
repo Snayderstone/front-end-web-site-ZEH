@@ -11,6 +11,18 @@
   // Movemos los datos a una constante para mejor mantenibilidad
   const team = [
     {
+      name: 'Carlos Fabián Izurieta Cabrera',
+      role: 'Docente Tutor',
+      email: 'cizurieta@uce.edu.ec',
+      avatar: '👨‍🏫',
+      isTeacher: true,
+      skills: ['Teaching', 'Mentoring', 'Research'],
+      socialLinks: {
+        github: 'https://github.com',
+        linkedin: 'https://linkedin.com'
+      }
+    },
+    {
       name: 'Melvin Cevallos',
       role: 'UI/UX Designer - Frontend Developer',
       email: 'micevallosg@uce.edu.ec',
@@ -66,12 +78,11 @@
       }
     },
     {
-      name: 'Carlos Fabián Izurieta Cabrera',
-      role: 'Docente Tutor',
-      email: 'cizurieta@uce.edu.ec',
-      avatar: '👨‍🏫',
-      isTeacher: true,
-      skills: ['Teaching', 'Mentoring', 'Research'],
+      name: 'Jeimmy Nicol Cevallos Guerra',
+      role: 'Architect Collaborator',
+      email: 'jncevallosg@uce.edu.ec',
+      avatar: '👷‍♀️',
+      skills: ['Architectural Design and Planning', 'Project Management and Construction'],
       socialLinks: {
         github: 'https://github.com',
         linkedin: 'https://linkedin.com'
